@@ -25,12 +25,13 @@ namespace WebApi2
                   "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '{0}' AND table_name = '__MigrationHistory'",
                   "students"));
 
-                // if MigrationHistory table is not there (which is the case first time we run) - create it
-                if (migrationHistoryTableExists.FirstOrDefault() == 0)
-                {
-                    context.Database.Delete();
-                    context.Database.Create();
-                }
+                //if MigrationHistory table is not there (which is the case first time we run) - create it
+                //uncomment the if statement the first time you run the app
+                //if (migrationHistoryTableExists.FirstOrDefault() == 0)
+                //{
+                //    context.Database.Delete();
+                //    context.Database.Create();
+                //}
             }
         }
     }
