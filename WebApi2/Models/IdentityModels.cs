@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using System.Data.Entity;
+
 
 namespace WebApi2.Models
 {
@@ -20,14 +22,16 @@ namespace WebApi2.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
-        
         public static ApplicationDbContext Create()
         {
+            Database.SetInitializer(new MySqlInitializer());
             return new ApplicationDbContext();
         }
+        public ApplicationDbContext()
+            : base("DefaultConnection")
+        {
+        }
+
+        public System.Data.Entity.DbSet<WebApi2.Models.student> student { get; set; }
     }
 }
